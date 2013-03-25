@@ -6,6 +6,10 @@
 " Note to myself:
 " DO NOT USE <C-z> FOR SAVING WHEN PRESENTING!
 " ============================================
+if has('gui_running')
+    set guifont=Ubuntu_Mono:h11
+endif
+
 
 
 " Automatic reloading of .vimrc
@@ -90,8 +94,7 @@ color wombat256mod
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
 filetype off
-filetype plugin indent on
-syntax on
+
 
 
 " Showing line numbers and length
@@ -140,6 +143,9 @@ set noswapfile
 " curl -so ~/.vim/autoload/pathogen.vim https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
 " Now you can install any plugin into a .vim/bundle/plugin-name/ folder
 call pathogen#infect()
+
+filetype plugin indent on
+syntax on
 
 
 " ============================================================================
