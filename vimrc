@@ -10,7 +10,11 @@
 
 " Change the font of the gui version
 if has('gui_running')
-    set guifont=Ubuntu_Mono:h11
+    if has("win32") || has("win16")
+        set guifont=Ubuntu_Mono:h11
+    else
+        set guifont=Ubuntu\ Mono\ 11
+    endif
     set lines=25 columns=84
 endif
 
