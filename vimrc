@@ -6,11 +6,47 @@
 " Note to myself:
 " DO NOT USE <C-z> FOR SAVING WHEN PRESENTING!
 " ============================================
+"
+
+" Change the font of the gui version
 if has('gui_running')
     set guifont=Ubuntu_Mono:h11
 endif
 
+" Make the gui version more like the console version
+" set guioptions+=c
+" set guioptions+=R
+" set guioptions-=m
+" set guioptions-=r
+" set guioptions-=b
+" set guioptions-=T
+" set guioptions-=R
+" set guioptions-=L
+" set guioptions-=e
 
+" easy tab management
+" nnoremap <Leader>tc :tabc<return>
+" nnoremap <Leader>tn :tabn<return>
+" nnoremap <Leader>tp :tabp<return>
+" nnoremap <Leader>te :tabe<space>
+
+" select all text in current buffer
+map <Leader>a ggVG
+
+" insert blank lines without going into insert mode
+nmap t o<Esc>k
+nmap T O<Esc>j
+
+" ex mode commands made easy
+nnoremap ; :
+
+autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
+
+" run python code from vim
+map <F5> :w <CR>:!python % <CR>
+
+" easier way to select buffers
+nmap <Leader>b :ls<CR>:buffer<Space>
 
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
@@ -60,6 +96,8 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
+nmap <Space> <C-w>w
+nmap <S-Space> <C-w>W
 
 
 " easier moving between tabs
@@ -114,6 +152,7 @@ nmap Q gqap
 " Useful settings
 set history=700
 set undolevels=700
+set autoread
 
 
 " Real programmers don't use TABs but spaces
@@ -175,11 +214,13 @@ map <Leader>g :call RopeGotoDefinition()<CR>
 let ropevim_enable_shortcuts = 1
 let g:pymode_rope_goto_def_newwin = "vnew"
 let g:pymode_rope_extended_complete = 1
+let g:pymode_doc = 1
+let g:pymode_doc_key = 'K'
 let g:pymode_breakpoint = 0
 let g:pymode_syntax = 1
 let g:pymode_syntax_builtin_objs = 0
 let g:pymode_syntax_builtin_funcs = 0
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+" map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
