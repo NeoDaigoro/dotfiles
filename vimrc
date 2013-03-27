@@ -11,6 +11,7 @@
 " Change the font of the gui version
 if has('gui_running')
     set guifont=Ubuntu_Mono:h11
+    set lines=25 columns=84
 endif
 
 " Make the gui version more like the console version
