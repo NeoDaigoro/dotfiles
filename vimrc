@@ -49,9 +49,9 @@ let mapleader = ","
 " Bind nohl
 " Removes highlight of your last search
 " ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
+"noremap <C-n> :nohl<CR>
+"vnoremap <C-n> :nohl<CR>
+"inoremap <C-n> :nohl<CR>
 
 
 " Quicksave command
@@ -154,7 +154,7 @@ set noswapfile
 autocmd BufEnter * silent! lcd %:p:h
 
 
-"set wildchar=<Tab> wildmenu wildmode=full
+set wildchar=<Tab> wildmenu wildmode=full
 set wildcharm=<C-Z>
 nnoremap <F10> :b <C-Z>
 set nocompatible
@@ -174,6 +174,7 @@ Bundle 'bling/vim-airline'
 Bundle 'Townk/vim-autoclose'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/nerdtree'
 
 filetype plugin indent on
 
@@ -190,3 +191,10 @@ function! AirlineInit()
     let g:bufferline_echo = 0
 endfunction
 autocmd VimEnter * call AirlineInit()
+
+noremap <Leader><Leader> <C-^>
+map <C-n> :NERDTreeToggle<CR>
+au GUIEnter * simalt ~x
+autocmd vimenter * if !argc() | NERDTree | endif
+let g:AutoClosePairs_add = "<> '' \"\""
+
