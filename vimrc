@@ -6,20 +6,11 @@
 " Note to myself:
 " DO NOT USE <C-z> FOR SAVING WHEN PRESENTING!
 " ============================================
-"
 
-" Change the font of the gui version
-if has('gui_running')
-    if has("win32") || has("win16")
-        set guifont=Ubuntu_Mono:h11
-    else
-        set guifont=Ubuntu\ Mono\ 11
-    endif
-    set lines=25 columns=84
-endif
+set encoding=utf-8
+set laststatus=2
+set guifont=DejaVu_Sans_Mono_for_Powerline:h11:cANSI
 
-" select all text in current buffer
-map <Leader>a ggVG
 
 " insert blank lines without going into insert mode
 nmap t o<Esc>k
@@ -29,7 +20,8 @@ nmap T O<Esc>j
 nnoremap ; :
 
 " run python code from vim
-map <F5> :w <CR>:!python % <CR>
+map <F5> :w <CR>:!py -3 % <CR>
+map <F6> :w <CR>:!py -2 % <CR>
 
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
@@ -63,9 +55,9 @@ inoremap <C-n> :nohl<CR>
 
 
 " Quicksave command
-noremap <C-Z> :update<CR>
-vnoremap <C-Z> <C-C>:update<CR>
-inoremap <C-Z> <C-O>:update<CR>
+"noremap <C-Z> :update<CR>
+"vnoremap <C-Z> <C-C>:update<CR>
+"inoremap <C-Z> <C-O>:update<CR>
 
 
 " Quick quit command
@@ -95,8 +87,8 @@ vnoremap <Leader>s :sort<CR>
 " easier moving of code blocks
 " Try to go into visual mode (v), thenselect several lines of code here and
 " then press ``>`` several times.
-"" vnoremap < <gv  " better indentation
-"" vnoremap > >gv  " better indentation
+vnoremap < <gv  " better indentation
+vnoremap > >gv  " better indentation
 
 
 " Show whitespace
@@ -115,8 +107,6 @@ colorscheme ir_black
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
-filetype off
-filetype plugin indent on
 syntax on
 
 
@@ -161,5 +151,42 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-set laststatus=2
 autocmd BufEnter * silent! lcd %:p:h
+
+
+"set wildchar=<Tab> wildmenu wildmode=full
+set wildcharm=<C-Z>
+nnoremap <F10> :b <C-Z>
+set nocompatible
+
+
+"Vundle configuration
+filetype off
+
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+" Vundle handles itself
+Bundle 'gmarik/vundle'
+
+" My bundles
+Bundle 'bling/vim-airline'
+Bundle 'Townk/vim-autoclose'
+Bundle 'tpope/vim-fugitive'
+Bundle 'scrooloose/syntastic'
+
+filetype plugin indent on
+
+
+" Airline configuration
+let g:airline_powerline_fonts = 1
+function! AirlineInit()
+    let g:airline_section_a =airline#section#create(['mode',' ','branch'])
+    let g:airline_section_b =airline#section#create_left(['ffenc','hunks','%f'])
+    let g:airline_section_c =airline#section#create(['filetype'])
+    let g:airline_section_x =airline#section#create(['%P'])
+    let g:airline_section_y =airline#section#create(['%B'])
+    let g:airline_section_z =airline#section#create_right(['%l','%c'])
+    let g:bufferline_echo = 0
+endfunction
+autocmd VimEnter * call AirlineInit()
