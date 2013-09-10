@@ -175,6 +175,7 @@ Bundle 'Townk/vim-autoclose'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
+Bundle 'saghul/vim-pep8'
 
 filetype plugin indent on
 
@@ -197,4 +198,4 @@ map <C-n> :NERDTreeToggle<CR>
 au GUIEnter * simalt ~x
 autocmd vimenter * if !argc() | NERDTree | endif
 let g:AutoClosePairs_add = "<> '' \"\""
-
+let g:pep8_map='<F7>'
