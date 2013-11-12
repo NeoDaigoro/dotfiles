@@ -98,8 +98,6 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 
 
 " Color scheme
-" mkdir -p ~/.vim/colors && cd ~/.vim/colors
-" wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
 set t_Co=256
 set background=dark
 colorscheme ir_black
@@ -116,7 +114,7 @@ set tw=79   " width of document (used by gd)
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
 set colorcolumn=80
-highlight ColorColumn ctermbg=233
+"highlight ColorColumn ctermbg=233
 
 
 " easier formatting of paragraphs
@@ -171,13 +169,12 @@ Bundle 'gmarik/vundle'
 
 " My bundles
 Bundle 'bling/vim-airline'
-Bundle 'Townk/vim-autoclose'
+Bundle 'Raimondi/delimitMate'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
-Bundle 'saghul/vim-pep8'
-
-filetype plugin indent on
+Bundle 'nvie/vim-flake8'
+Bundle 'davidhalter/jedi-vim'
 
 
 " Airline configuration
@@ -197,5 +194,7 @@ noremap <Leader><Leader> <C-^>
 map <C-n> :NERDTreeToggle<CR>
 au GUIEnter * simalt ~x
 autocmd vimenter * if !argc() | NERDTree | endif
-let g:AutoClosePairs_add = "<> '' \"\""
-let g:pep8_map='<F7>'
+autocmd BufWritePost *.py call Flake8()
+let NERDTreeQuitOnOpen = 1
+let g:jedi#use_splits_not_buffers="top"
+filetype plugin indent on
