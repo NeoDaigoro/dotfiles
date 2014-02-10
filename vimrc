@@ -10,6 +10,10 @@
 set encoding=utf-8
 set laststatus=2
 set guifont=DejaVu_Sans_Mono_for_Powerline:h11:cANSI
+set langmenu=en_US
+let $LANG = 'en_US'
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
 
 
 " insert blank lines without going into insert mode
@@ -20,8 +24,8 @@ nmap T O<Esc>j
 nnoremap ; :
 
 " run python code from vim
-map <F5> :w <CR>:!py -3 % <CR>
-map <F6> :w <CR>:!py -2 % <CR>
+map <F5> :w <CR>:!python % <CR>
+"map <F6> :w <CR>:!py -2 % <CR>
 
 " Automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
@@ -100,8 +104,8 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 " Color scheme
 set t_Co=256
 set background=dark
-colorscheme ir_black
-
+"colorscheme ir_black
+colorscheme solarized
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
@@ -174,7 +178,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'nvie/vim-flake8'
-Bundle 'davidhalter/jedi-vim'
+Bundle 'altercation/vim-colors-solarized'
+"Bundle 'davidhalter/jedi-vim'
 
 
 " Airline configuration
@@ -196,5 +201,5 @@ au GUIEnter * simalt ~x
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd BufWritePost *.py call Flake8()
 let NERDTreeQuitOnOpen = 1
-let g:jedi#use_splits_not_buffers="top"
+"let g:jedi#use_splits_not_buffers="top"
 filetype plugin indent on
