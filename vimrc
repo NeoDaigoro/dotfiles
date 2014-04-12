@@ -24,7 +24,7 @@ nmap T O<Esc>j
 nnoremap ; :
 
 " run python code from vim
-map <F5> :w <CR>:!python % <CR>
+"map <F5> :w <CR>:!python % <CR>
 "map <F6> :w <CR>:!py -2 % <CR>
 
 " Automatic reloading of .vimrc
@@ -172,12 +172,13 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " My bundles
+Bundle 'klen/python-mode'
 Bundle 'bling/vim-airline'
 Bundle 'Raimondi/delimitMate'
 Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/syntastic'
+"Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
-Bundle 'nvie/vim-flake8'
+"Bundle 'nvie/vim-flake8'
 Bundle 'altercation/vim-colors-solarized'
 "Bundle 'davidhalter/jedi-vim'
 
@@ -196,10 +197,31 @@ endfunction
 autocmd VimEnter * call AirlineInit()
 
 noremap <Leader><Leader> <C-^>
+let g:pymode = 1
+let g:pymode_options = 1
+let g:pymode_version = 'python3'
+let g:pymode_motion = 1
+let g:pymode_doc = 1
+let g:pymode_doc_bind = 'K'
+let g:pymode_lint = 1
+let g:pymode_lint_on_write = 1
+let g:pymode_lint_message = 1
+let g:pymode_lint_checkers = ['pep8', 'pyflakes']
+let g:pymode_rope_completion = 1
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_folding = 0
+let g:pymode_virtualenv = 0
+let g:pymode_run = 0
+let g:pymode_rope_complete_on_dot = 1
+let g:pymode_rope_autoimport = 1
+let g:pymode_rope_autoimport_import_after_complete = 0
+
+
 map <C-n> :NERDTreeToggle<CR>
-au GUIEnter * simalt ~x
+"au GUIEnter * simalt ~x
 autocmd vimenter * if !argc() | NERDTree | endif
-autocmd BufWritePost *.py call Flake8()
+"autocmd BufWritePost *.py call Flake8()
 let NERDTreeQuitOnOpen = 1
 "let g:jedi#use_splits_not_buffers="top"
 filetype plugin indent on
