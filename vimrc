@@ -104,15 +104,12 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 " Color scheme
 set t_Co=256
 set background=dark
-colorscheme blackboard
 "colorscheme ir_black
-"colorscheme solarized
+colorscheme molokai
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
 syntax on
-filetype on
-filetype plugin indent on
 
 
 " Showing line numbers and length
@@ -166,6 +163,7 @@ set nocompatible
 
 
 "Vundle configuration
+filetype off
 
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
@@ -178,12 +176,8 @@ Bundle 'klen/python-mode'
 Bundle 'bling/vim-airline'
 Bundle 'Raimondi/delimitMate'
 Bundle 'tpope/vim-fugitive'
-"Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
-"Bundle 'nvie/vim-flake8'
 Bundle 'altercation/vim-colors-solarized'
-"Bundle 'davidhalter/jedi-vim'
-Bundle 'Shougo/unite'
 
 
 " Airline configuration
@@ -211,8 +205,8 @@ let g:pymode_lint_on_write = 1
 let g:pymode_lint_message = 1
 let g:pymode_lint_checkers = ['pep8', 'pyflakes']
 let g:pymode_rope_completion = 1
-let g:pymode_syntax = 0
-let g:pymode_syntax_all = 0
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
 let g:pymode_folding = 0
 let g:pymode_virtualenv = 0
 let g:pymode_run = 0
@@ -227,4 +221,4 @@ autocmd vimenter * if !argc() | NERDTree | endif
 "autocmd BufWritePost *.py call Flake8()
 let NERDTreeQuitOnOpen = 1
 "let g:jedi#use_splits_not_buffers="top"
-"filetype plugin indent on
+filetype plugin indent on
