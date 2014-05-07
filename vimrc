@@ -80,8 +80,8 @@ nmap <S-Space> <C-w>W
 
 
 " easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
+"map <Leader>n <esc>:tabprevious<CR>
+"map <Leader>m <esc>:tabnext<CR>
 
 
 " map sort function to a key
@@ -104,8 +104,8 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 " Color scheme
 set t_Co=256
 set background=dark
-"colorscheme ir_black
-colorscheme molokai
+"colorscheme jellybeans
+colorscheme candyman
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
@@ -178,19 +178,28 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/nerdtree'
 Bundle 'altercation/vim-colors-solarized'
-
+Bundle 'majutsushi/tagbar'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'terryma/vim-multiple-cursors'
 
 " Airline configuration
 let g:airline_powerline_fonts = 1
+"let g:airline_theme = 'solarized'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#bufferline#enabled = 1
+
 function! AirlineInit()
     let g:airline_section_a =airline#section#create(['mode',' ','branch'])
-    let g:airline_section_b =airline#section#create_left(['ffenc','hunks','%f'])
-    let g:airline_section_c =airline#section#create(['filetype'])
-    let g:airline_section_x =airline#section#create(['%P'])
-    let g:airline_section_y =airline#section#create(['%B'])
-    let g:airline_section_z =airline#section#create_right(['%l','%c'])
-    let g:bufferline_echo = 0
+    let g:airline_section_b =airline#section#create_left(['ffenc'])
+    let g:airline_section_c =airline#section#create(['%f'])
+    let g:airline_section_x =airline#section#create(["%{tagbar#currenttag('[%s] ','')}"])
+    let g:airline_section_y =airline#section#create(['%P'])
+    let g:airline_section_z =airline#section#create_right(['%l/%L','%c'])
+"    let g:bufferline_echo = 0
 endfunction
+
 autocmd VimEnter * call AirlineInit()
 
 noremap <Leader><Leader> <C-^>
@@ -198,27 +207,54 @@ let g:pymode = 1
 let g:pymode_options = 1
 let g:pymode_version = 'python3'
 let g:pymode_motion = 1
-let g:pymode_doc = 1
-let g:pymode_doc_bind = 'K'
+"let g:pymode_doc = 1
+"let g:pymode_doc_bind = 'K'
 let g:pymode_lint = 1
 let g:pymode_lint_on_write = 1
 let g:pymode_lint_message = 1
 let g:pymode_lint_checkers = ['pep8', 'pyflakes']
-let g:pymode_rope_completion = 1
 let g:pymode_syntax = 1
 let g:pymode_syntax_all = 1
 let g:pymode_folding = 0
 let g:pymode_virtualenv = 0
 let g:pymode_run = 0
+let g:pymode_rope = 1
+let g:pymode_rope_completion = 1
 let g:pymode_rope_complete_on_dot = 1
 let g:pymode_rope_autoimport = 1
 let g:pymode_rope_autoimport_import_after_complete = 0
+let g:pymode_rope_rename_bind = '<C-c>rr'
+let g:pymode_rope_show_doc_bind = '<C-c>d'
+let g:pymode_rope_completion_bind = '<C-Space>'
+"let g:pymode_rope_goto_definition_bind = '<C-c>g'
+let g:pymode_rope_organize_imports_bind = '<C-c>ro'
+let g:pymode_rope_autoimport_bind = '<C-c>ra'
+let g:pymode_folding = 1
 
-
-map <C-n> :NERDTreeToggle<CR>
-"au GUIEnter * simalt ~x
-autocmd vimenter * if !argc() | NERDTree | endif
-"autocmd BufWritePost *.py call Flake8()
+"NERDTree
+map <Leader>n :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen = 1
-"let g:jedi#use_splits_not_buffers="top"
+
+"au GUIEnter * simalt ~x
+"autocmd vimenter * if !argc() | NERDTree | endif
+"autocmd BufWritePost *.py call Flake8()
 filetype plugin indent on
+
+"closetag.vim
+let g:closetag_html_style = 1
+au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
+
+"Tagbar
+nnoremap <silent> <F8> :TagbarToggle<CR>
+nnoremap <silent> <F9> :TagbarOpenAutoClose<CR>
+let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_sort = 0
+let g:tagbar_show_visibility = 1
+let g:tagbar_singleclick = 0
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+    let colour = a:current ? '%#StatusLine#' : '%#StatusLineNC#'
+    return colour . '[' . a:sort . '] ' . a:fname
+endfunction
+let g:tagbar_status_func = 'TagbarStatusFunc'
+"autocmd FileType python,py nested :TagbarOpen
