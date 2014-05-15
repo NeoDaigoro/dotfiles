@@ -105,7 +105,10 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 set t_Co=256
 set background=dark
 "colorscheme jellybeans
-colorscheme candyman
+"colorscheme candyman
+"colorscheme herald
+"colorscheme molokai
+colorscheme solarized
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
@@ -181,6 +184,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'majutsushi/tagbar'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'terryma/vim-multiple-cursors'
+Bundle 'mattn/emmet-vim'
 
 " Airline configuration
 let g:airline_powerline_fonts = 1
@@ -207,8 +211,8 @@ let g:pymode = 1
 let g:pymode_options = 1
 let g:pymode_version = 'python3'
 let g:pymode_motion = 1
-"let g:pymode_doc = 1
-"let g:pymode_doc_bind = 'K'
+let g:pymode_doc = 0
+let g:pymode_doc_bind = 'K'
 let g:pymode_lint = 1
 let g:pymode_lint_on_write = 1
 let g:pymode_lint_message = 1
@@ -258,3 +262,36 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
 endfunction
 let g:tagbar_status_func = 'TagbarStatusFunc'
 "autocmd FileType python,py nested :TagbarOpen
+
+
+"emmet-vim
+let g:user_emmet_install_global = 0
+"let g:use_emmet_complete_tag = 1
+autocmd FileType html,css EmmetInstall
+
+function! Expander()
+  let line   = getline(".")
+  let col    = col(".")
+  let first  = line[col-2]
+  let second = line[col-1]
+  let third  = line[col]
+
+  if first ==# ">"
+    if second ==# "<" && third ==# "/"
+      return "\<CR>\<C-o>==\<C-o>O"
+
+    else
+      return "\<CR>"
+
+    endif
+
+  else
+    return "\<CR>"
+
+  endif
+
+endfunction
+
+inoremap <expr> <CR> Expander()
+
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
