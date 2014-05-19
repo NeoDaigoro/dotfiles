@@ -108,7 +108,7 @@ set background=dark
 "colorscheme candyman
 "colorscheme herald
 "colorscheme molokai
-colorscheme solarized
+colorscheme base16-shapeshifter
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
@@ -185,6 +185,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'flazz/vim-colorschemes'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'mattn/emmet-vim'
+Bundle 'chriskempson/base16-vim'
 
 " Airline configuration
 let g:airline_powerline_fonts = 1
