@@ -108,7 +108,8 @@ set background=dark
 "colorscheme candyman
 "colorscheme herald
 "colorscheme molokai
-colorscheme base16-shapeshifter
+"colorscheme base16-shapeshifter
+colorscheme solarized
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
@@ -224,9 +225,9 @@ let g:pymode_folding = 0
 let g:pymode_virtualenv = 0
 let g:pymode_run = 0
 let g:pymode_rope = 1
-let g:pymode_rope_completion = 1
-let g:pymode_rope_complete_on_dot = 1
-let g:pymode_rope_autoimport = 1
+let g:pymode_rope_completion = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_autoimport = 0
 let g:pymode_rope_autoimport_import_after_complete = 0
 let g:pymode_rope_rename_bind = '<C-c>rr'
 let g:pymode_rope_show_doc_bind = '<C-c>d'
