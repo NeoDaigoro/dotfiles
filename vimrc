@@ -107,9 +107,9 @@ set background=dark
 "colorscheme jellybeans
 "colorscheme candyman
 "colorscheme herald
-"colorscheme molokai
+"colorscheme solarized
+colorscheme gotham
 "colorscheme base16-shapeshifter
-colorscheme solarized
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
@@ -187,6 +187,7 @@ Bundle 'flazz/vim-colorschemes'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'mattn/emmet-vim'
 Bundle 'chriskempson/base16-vim'
+Bundle 'whatyouhide/vim-gotham'
 
 " Airline configuration
 let g:airline_powerline_fonts = 1
@@ -218,7 +219,7 @@ let g:pymode_doc_bind = 'K'
 let g:pymode_lint = 1
 let g:pymode_lint_on_write = 1
 let g:pymode_lint_message = 1
-let g:pymode_lint_checkers = ['pep8', 'pyflakes']
+let g:pymode_lint_checkers = ['pep8']
 let g:pymode_syntax = 1
 let g:pymode_syntax_all = 1
 let g:pymode_folding = 0
